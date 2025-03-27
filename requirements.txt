@@ -1,0 +1,9 @@
+boto3>=1.28.0
+rich>=13.0.0
+mcp-client>=0.1.0
+anyio>=3.6.2
+markdown-it-py>=3.0.0
+uvicorn>=0.27.0
+python-dotenv>=1.0.0
+httpx>=0.27.0
+pygments>=2.17.0
