@@ -1,6 +1,10 @@
 # Q-2001
 
+> Built by Amazon Q Developer itself ❤️ (and rounds of debug...) A tiny learning project 📚
+
 Q-2001 is an intelligent AI assistant based on the command line, powered by AWS Bedrock. It uses advanced large language models (such as Claude) to answer questions, provide help, and engage in conversations, with powerful intelligent Agent capabilities.
+
+<img width="1240" alt="image" src="https://github.com/user-attachments/assets/037152d6-9e86-4342-9f8b-14d0842cdd5a" />
 
 ## Features
 
@@ -40,6 +44,7 @@ python Q-2001.py --model us.amazon.nova-micro-v1:0
 
 # Specify AWS profile
 python Q-2001.py --profile myprofile
+```
 
 ## Commands
 
