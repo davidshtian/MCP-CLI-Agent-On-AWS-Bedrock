@@ -15,7 +15,7 @@ Q-2001 is an agentic AI assistant based on the command line, powered by AWS Bedr
 - Conversation history and context management
 - Customizable configuration
 - Support for saving conversations to files
-- **Intelligent Agent Mode** - Automatically detects and handles complex tasks, plans and executes steps
+- **Agent Mode** - Automatically detects and handles complex tasks, plans and executes steps
 - **MCP Integration** - Extended functionality through Model Context Protocol
 
 ## Installation
