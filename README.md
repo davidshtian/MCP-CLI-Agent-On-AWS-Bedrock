@@ -91,19 +91,19 @@ Q-2001 creates a configuration file at `~/.q2001_mcp_config.json` which can be m
 ```json
 {
     "mcpServers": {
+        "whois": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@bharathvaj/whois-mcp@latest"
+            ]
+        },
         "filesystem": {
             "command": "npx",
             "args": [
                 "-y",
                 "@modelcontextprotocol/server-filesystem",
-                "/Users/xxx"
-            ]
-        },
-        "time": {
-            "command": "uvx",
-            "args": [
-                "mcp-server-time",
-                "--local-timezone=UTC"
+                "/Users/shtian"
             ]
         }
     }
