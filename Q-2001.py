@@ -514,7 +514,17 @@ class Q2001:
 
         # Initialize MCP if servers are registered
         if self.mcp.has_servers():
+            console.print("[system]Initializing MCP servers...[/system]")
             await self.mcp.initialize()
+
+            # Show which servers were successfully loaded
+            loaded_servers = [name for name, info in self.mcp.servers.items() if info.get("tools")]
+            if loaded_servers:
+                console.print("[system]MCP servers loaded:[/system]")
+                for server_name in loaded_servers:
+                    console.print(f"[system]- {server_name}[/system]")
+            else:
+                console.print("[system]No MCP servers were successfully loaded[/system]")
 
         # Initial greeting
         console.print("[assistant]Q-2001:[/assistant] Hello! I'm your agentic assistant. How can I help you today?")
