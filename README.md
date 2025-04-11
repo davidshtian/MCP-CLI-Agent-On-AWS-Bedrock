@@ -4,13 +4,7 @@
 
 Q-2001 is an agentic AI assistant based on the command line, powered by AWS Bedrock. It uses advanced large language models (such as Claude) to answer questions, provide help, and engage in conversations, with powerful intelligent Agent capabilities.
 
-**MCP Servers**
-
 <img width="738" alt="image" src="https://github.com/user-attachments/assets/e4c6c2c6-07ef-46c1-a033-761c6e6118ac" />
-
-**MCP Tool Call Example**
-
-<img width="986" alt="image" src="https://github.com/user-attachments/assets/1e827280-7a0a-4a18-851d-033627749df9" />
 
 ## Features
 
@@ -128,6 +122,11 @@ Q-2001 creates a configuration file at `~/.q2001_mcp_config.json` which can be m
     }
 }
 ```
+
+**MCP Tool Call Example**
+
+<img width="986" alt="image" src="https://github.com/user-attachments/assets/1e827280-7a0a-4a18-851d-033627749df9" />
+
 
 ## Requirements
 
