@@ -4,7 +4,13 @@
 
 Q-2001 is an agentic AI assistant based on the command line, powered by AWS Bedrock. It uses advanced large language models (such as Claude) to answer questions, provide help, and engage in conversations, with powerful intelligent Agent capabilities.
 
-<img width="1240" alt="image" src="https://github.com/user-attachments/assets/037152d6-9e86-4342-9f8b-14d0842cdd5a" />
+**MCP Servers**
+
+<img width="738" alt="image" src="https://github.com/user-attachments/assets/e4c6c2c6-07ef-46c1-a033-761c6e6118ac" />
+
+**MCP Tool Call Example**
+
+<img width="986" alt="image" src="https://github.com/user-attachments/assets/1e827280-7a0a-4a18-851d-033627749df9" />
 
 ## Features
 
@@ -91,11 +97,17 @@ Q-2001 creates a configuration file at `~/.q2001_mcp_config.json` which can be m
 ```json
 {
     "mcpServers": {
-        "whois": {
-            "command": "npx",
+        "aws-document": {
+            "command": "uvx",
             "args": [
-                "-y",
-                "@bharathvaj/whois-mcp@latest"
+                "awslabs.aws-documentation-mcp-server@latest"
+            ]
+        },
+        "mcp-server-time": {
+            "command": "uvx",
+            "args": [
+                "mcp-server-time",
+                "--local-timezone=America/New_York"
             ]
         },
         "filesystem": {
@@ -103,7 +115,14 @@ Q-2001 creates a configuration file at `~/.q2001_mcp_config.json` which can be m
             "args": [
                 "-y",
                 "@modelcontextprotocol/server-filesystem",
-                "/Users/shtian"
+                "/home/ec2-user/"
+            ]
+        },
+        "sequential-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
             ]
         }
     }
