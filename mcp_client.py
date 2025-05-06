@@ -25,7 +25,9 @@ class MCPClient:
         """Check if any servers are registered"""
         return len(self.servers) > 0
 
-    def register_server(self, name: str, command: str, args: List[str]) -> bool:
+    def register_server(
+        self, name: str, command: str, args: List[str], env: Dict[str, str] = None
+    ) -> bool:
         """Register an MCP server"""
         try:
             # Register server
@@ -33,7 +35,8 @@ class MCPClient:
                 "name": name,
                 "command": command,
                 "args": args,
-                "tools": []
+                "env": env,
+                "tools": [],
             }
             return True
         except:
@@ -59,7 +62,8 @@ class MCPClient:
         params = stdio.StdioServerParameters(
             command=server["command"],
             args=server["args"],
-            name=f"q-2001-{server['name']}"
+            name=f"q-2001-{server['name']}",
+            env=server.get("env"),  # Pass environment variables if available
         )
 
         # Start server and create session
@@ -68,13 +72,16 @@ class MCPClient:
                 await session.initialize()
                 tools_result = await session.list_tools()
 
-                if tools_result and hasattr(tools_result, 'tools'):
-                    server["tools"] = [{
-                        "name": tool.name,
-                        "description": tool.description,
-                        "inputSchema": tool.inputSchema,
-                        "server": server["name"]
-                    } for tool in tools_result.tools]
+                if tools_result and hasattr(tools_result, "tools"):
+                    server["tools"] = [
+                        {
+                            "name": tool.name,
+                            "description": tool.description,
+                            "inputSchema": tool.inputSchema,
+                            "server": server["name"],
+                        }
+                        for tool in tools_result.tools
+                    ]
                     return True
                 return False
 
@@ -108,7 +115,8 @@ class MCPClient:
             params = stdio.StdioServerParameters(
                 command=server_info["command"],
                 args=server_info["args"],
-                name=f"q-2001-tool-call"
+                name=f"q-2001-tool-call",
+                env=server_info.get("env"),  # Pass environment variables if available
             )
 
             # Execute tool with timeout protection
@@ -117,8 +125,7 @@ class MCPClient:
                     await session.initialize()
 
                     result = await asyncio.wait_for(
-                        session.call_tool(tool_name, tool_input),
-                        timeout=30.0
+                        session.call_tool(tool_name, tool_input), timeout=30.0
                     )
 
                     # Format response
@@ -139,12 +146,14 @@ class MCPClient:
         tools = []
         for server in self.servers.values():
             for tool in server.get("tools", []):
-                tools.append({
-                    "toolSpec": {
-                        "name": tool["name"],
-                        "description": tool["description"],
-                        "inputSchema": {"json": tool["inputSchema"]}
+                tools.append(
+                    {
+                        "toolSpec": {
+                            "name": tool["name"],
+                            "description": tool["description"],
+                            "inputSchema": {"json": tool["inputSchema"]},
+                        }
                     }
-                })
+                )
 
         return {"tools": tools} if tools else None
