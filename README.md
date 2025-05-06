@@ -1,22 +1,18 @@
 # Q-2001
 
-> Built by Amazon Q Developer itself ❤️ (and rounds of debug...) A tiny learning project 📚
+Q-2001 is a command-line AI assistant powered by AWS Bedrock. It uses advanced large language models to answer questions, provide help, and engage in conversations, with intelligent tool capabilities through Model Context Protocol (MCP) integration.
 
-Q-2001 is an agentic AI assistant based on the command line, powered by AWS Bedrock. It uses advanced large language models (such as Claude) to answer questions, provide help, and engage in conversations, with powerful intelligent Agent capabilities.
+<img width="963" alt="image" src="https://github.com/user-attachments/assets/198a861e-b863-4047-bcd3-c4b8622b65f9" />
 
-<img width="738" alt="image" src="https://github.com/user-attachments/assets/e4c6c2c6-07ef-46c1-a033-761c6e6118ac" />
 
 ## Features
 
-- Simple and easy-to-use command line interface
+- Simple and easy-to-use command line interface with rich formatting
 - Support for multiple AWS Bedrock models (Claude, DeepSeek, Nova, etc.)
-- Markdown rendering support
-- Real-time streaming responses (Claude model)
+- Real-time streaming responses
 - Conversation history and context management
+- Tool usage capabilities through MCP integration
 - Customizable configuration
-- Support for saving conversations to files
-- **Agent Mode** - Automatically detects and handles complex tasks, plans and executes steps
-- **MCP Integration** - Extended functionality through Model Context Protocol
 
 ## Installation
 
@@ -44,6 +40,12 @@ python Q-2001.py --model us.amazon.nova-micro-v1:0
 
 # Specify AWS profile
 python Q-2001.py --profile myprofile
+
+# Specify AWS region
+python Q-2001.py --region us-east-1
+
+# Show version
+python Q-2001.py --version
 ```
 
 ## Commands
@@ -54,39 +56,17 @@ The following commands are available in Q-2001:
 - `/help`: Display help information
 - `/clear`: Clear conversation history
 - `/model <model_id>`: Change AI model
-- `/save <filename>`: Save conversation to file
-- `/config`: Display current configuration
-- `/mcp <path1> [path2...]`: Register MCP filesystem server and specify allowed access paths
 - `/tools`: List all available MCP tools
-
-## Intelligent Agent Features
-
-Q-2001 has powerful intelligent Agent capabilities for handling complex tasks:
-
-### Automatic Task Analysis
-
-Q-2001 automatically analyzes the complexity of user requests:
-- Provides direct answers for simple questions
-- Automatically switches to Agent mode for complex tasks
-
-### Agent Mode Workflow
-
-When a complex task is detected, Q-2001 will:
-
-1. **Plan** - Create a detailed step-by-step plan
-2. **Execute** - Carry out operations in the plan step by step
-3. **Observe** - Record the results of each step
-4. **Reflect** - Analyze progress and adjust the plan
-5. **Iterate** - Update the plan as needed and continue execution
-6. **Complete** - Determine if the task is finished and provide final answer
 
 ## MCP Integration
 
-Q-2001 supports extended functionality through Model Context Protocol (MCP):
+Q-2001 supports extended functionality through Model Context Protocol (MCP). The MCP client handles the integration with various tool servers.
 
-## Configuration
+### Configuration
 
 Q-2001 creates a configuration file at `~/.q2001_mcp_config.json` which can be manually edited to change default settings.
+
+Example configuration:
 
 ```json
 {
@@ -123,20 +103,36 @@ Q-2001 creates a configuration file at `~/.q2001_mcp_config.json` which can be m
 }
 ```
 
-**MCP Tool Call Example**
+## Tool Capabilities
 
-<img width="986" alt="image" src="https://github.com/user-attachments/assets/1e827280-7a0a-4a18-851d-033627749df9" />
+When MCP servers are configured and initialized, Q-2001 can:
+
+1. Automatically detect when tools are needed to solve a problem
+2. Call appropriate tools with proper parameters
+3. Process tool results and incorporate them into responses
+4. Handle multiple tool calls in a single conversation
+
+<img width="1024" alt="image" src="https://github.com/user-attachments/assets/5ff8bbc1-6946-47c3-bf67-0ac2e01b1fc5" />
 
 
 ## Requirements
 
 - Python 3.11+
+- Required Python packages:
+  - boto3
+  - rich
+  - mcp
+  - anyio
+  - markdown-it-py
+  - uvicorn
+  - python-dotenv
+  - httpx
+  - pygments
 - AWS account and appropriate permissions to access Bedrock services
 - Configured AWS credentials
-- Node.js and npm (for npx commands)
+- Node.js and npm (for npx commands with certain MCP servers)
 
 ## Notes
 
 - Using this tool will incur AWS Bedrock API call costs
 - Ensure your AWS account has Bedrock service enabled and access to required models
-- When using the MCP filesystem server, carefully specify allowed access paths to protect sensitive data
