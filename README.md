@@ -1,4 +1,4 @@
-# Q-2001
+# MCP Agent CLI on AWS Bedrock (AKA Q-2001)
 
 Q-2001 is a command-line AI assistant powered by AWS Bedrock. It uses advanced large language models to answer questions, provide help, and engage in conversations, with intelligent tool capabilities through Model Context Protocol (MCP) integration.
 
